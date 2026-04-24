@@ -38,7 +38,7 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>Get started Final {isLoading ? <span>Loading...</span> : data?.message}</h1>
+          <h1>Get started {isLoading ? <span>Loading...</span> : data?.message}</h1>
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
