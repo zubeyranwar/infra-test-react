@@ -1,11 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import './App.css'
+import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [data, setData] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    const fetchHome = async () => {
+      setData(null)
+      setIsLoading(true)
+      try {
+        const response = await fetch('http://localhost:3000/')
+        const data = await response.json()
+        console.log('Raw response from server:', data)
+        setData(data)
+        console.log('Response from server:', data)
+      } catch (error) {
+        console.error('Error fetching from server:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    void fetchHome()
+  }, [])
 
   return (
     <>
@@ -16,7 +38,7 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>Get started Final 2</h1>
+          <h1>Get started Final {isLoading ? <span>Loading...</span> : data?.message}</h1>
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
