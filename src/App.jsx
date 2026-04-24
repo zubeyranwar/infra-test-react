@@ -14,7 +14,7 @@ function App() {
       setData(null)
       setIsLoading(true)
       try {
-        const response = await fetch('http://localhost:3000/')
+        const response = await fetch('http://127.0.0.1:18081/')
         const data = await response.json()
         console.log('Raw response from server:', data)
         setData(data)
